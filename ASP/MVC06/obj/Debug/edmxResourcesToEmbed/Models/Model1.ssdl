@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_Shop4TrainingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="carts">
+    <Key>
+      <PropertyRef Name="iCartID" />
+    </Key>
+    <Property Name="iCartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iSL" Type="int" Nullable="false" />
+    <Property Name="fk_iHangHoaID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblChitiethoadon">
+    <Key>
+      <PropertyRef Name="FK_iHoadonID" />
+      <PropertyRef Name="FK_iHanghoaID" />
+    </Key>
+    <Property Name="FK_iHoadonID" Type="int" Nullable="false" />
+    <Property Name="FK_iHanghoaID" Type="int" Nullable="false" />
+    <Property Name="iSoluong" Type="int" Nullable="false" />
+    <Property Name="fGiaban" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblHanghoa">
+    <Key>
+      <PropertyRef Name="PK_iHanghoaID" />
+    </Key>
+    <Property Name="PK_iHanghoaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sTenhang" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="fGianiemyet" Type="float" Nullable="false" />
+    <Property Name="sDacdiem" Type="ntext" />
+    <Property Name="sXuatxu" Type="nvarchar" MaxLength="300" />
+    <Property Name="sAnhminhhoa" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tblHoadon">
+    <Key>
+      <PropertyRef Name="PK_iHoadonID" />
+    </Key>
+    <Property Name="PK_iHoadonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tNgaylap" Type="datetime" Nullable="false" />
+    <Property Name="FK_iKhachhangID" Type="int" Nullable="false" />
+    <Property Name="tNgayGiaoHang" Type="datetime" Nullable="false" />
+    <Property Name="sTennguoinhan" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="sDiachigiaohang" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="sDienthoaiNguoinhan" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="bDathanhtoan" Type="bit" Nullable="false" />
+    <Property Name="sNguoilapHoadon" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fTileGiamgia" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblKhachhang">
+    <Key>
+      <PropertyRef Name="PK_iKhachhangID" />
+    </Key>
+    <Property Name="PK_iKhachhangID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sHoten" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sDiachi" Type="nvarchar" MaxLength="200" />
+    <Property Name="sDienthoai" Type="varchar" MaxLength="12" />
+    <Property Name="bGioitinh" Type="bit" Nullable="false" />
+    <Property Name="tNgaysinh" Type="datetime" Nullable="false" />
+    <Property Name="sTenCoquan" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__carts__fk_iHangH__619B8048">
+    <End Role="tblHanghoa" Type="Self.tblHanghoa" Multiplicity="1" />
+    <End Role="carts" Type="Self.carts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHanghoa">
+        <PropertyRef Name="PK_iHanghoaID" />
+      </Principal>
+      <Dependent Role="carts">
+        <PropertyRef Name="fk_iHangHoaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblChitiethoadon_tblHanghoa">
+    <End Role="tblHanghoa" Type="Self.tblHanghoa" Multiplicity="1" />
+    <End Role="tblChitiethoadon" Type="Self.tblChitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHanghoa">
+        <PropertyRef Name="PK_iHanghoaID" />
+      </Principal>
+      <Dependent Role="tblChitiethoadon">
+        <PropertyRef Name="FK_iHanghoaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblChitiethoadon_tblHoadon">
+    <End Role="tblHoadon" Type="Self.tblHoadon" Multiplicity="1" />
+    <End Role="tblChitiethoadon" Type="Self.tblChitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHoadon">
+        <PropertyRef Name="PK_iHoadonID" />
+      </Principal>
+      <Dependent Role="tblChitiethoadon">
+        <PropertyRef Name="FK_iHoadonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblHoadon_tblKhachhang1">
+    <End Role="tblKhachhang" Type="Self.tblKhachhang" Multiplicity="1" />
+    <End Role="tblHoadon" Type="Self.tblHoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKhachhang">
+        <PropertyRef Name="PK_iKhachhangID" />
+      </Principal>
+      <Dependent Role="tblHoadon">
+        <PropertyRef Name="FK_iKhachhangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_Shop4TrainingModelStoreContainer">
+    <EntitySet Name="carts" EntityType="Self.carts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblChitiethoadon" EntityType="Self.tblChitiethoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHanghoa" EntityType="Self.tblHanghoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHoadon" EntityType="Self.tblHoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblKhachhang" EntityType="Self.tblKhachhang" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__carts__fk_iHangH__619B8048" Association="Self.FK__carts__fk_iHangH__619B8048">
+      <End Role="tblHanghoa" EntitySet="tblHanghoa" />
+      <End Role="carts" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblChitiethoadon_tblHanghoa" Association="Self.FK_tblChitiethoadon_tblHanghoa">
+      <End Role="tblHanghoa" EntitySet="tblHanghoa" />
+      <End Role="tblChitiethoadon" EntitySet="tblChitiethoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblChitiethoadon_tblHoadon" Association="Self.FK_tblChitiethoadon_tblHoadon">
+      <End Role="tblHoadon" EntitySet="tblHoadon" />
+      <End Role="tblChitiethoadon" EntitySet="tblChitiethoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblHoadon_tblKhachhang1" Association="Self.FK_tblHoadon_tblKhachhang1">
+      <End Role="tblKhachhang" EntitySet="tblKhachhang" />
+      <End Role="tblHoadon" EntitySet="tblHoadon" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

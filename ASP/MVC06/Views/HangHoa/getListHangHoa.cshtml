@@ -1,0 +1,92 @@
+﻿@model IEnumerable<MVC05.Models.tblHanghoa>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Tên hàng
+        </th>
+        <th>
+            Ảnh
+        </th>
+        <th>
+            Giá niêm yết
+        </th>
+        <th>
+            Xuất xứ
+        </th>
+        <th>
+            Đặc điểm
+        </th>
+        <th>
+            Xử lý
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="@item.PK_iHanghoaID">
+            <td>
+                @item.PK_iHanghoaID
+
+            </td>
+            <td>
+                @item.sTenhang
+            </td>
+            <td>
+                <img src="~/Images/@item.sAnhminhhoa" alt="Ảnh minh hoạ" class="thumbnail-img" />
+
+            </td>
+            <td>
+                @item.fGianiemyet
+            </td>
+            <td>
+                @item.sXuatxu
+            </td>
+            <td>
+                @item.sDacdiem
+            </td>
+            <td>
+                <button class="btn-delete" data-id="@item.PK_iHanghoaID">Xóa</button>
+            </td>
+
+        </tr>
+    }
+
+</table>
+<style>
+    .thumbnail-img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        
+        $(".btn-delete").click(function () {
+            var hanghoaId = $(this).data("id");
+            if (confirm("Có chắc chắn muốn xoá không?")) {
+                $.ajax({
+                    url: '/HangHoa/Delete',
+                    method: 'delete',
+                    data: { id: hanghoaId },
+                    success: function (result) {
+                        if (result.success) {
+                            var element = document.getElementById(hanghoaId)
+                            element.parentNode.removeChild(element)
+                        } else {
+                            alert("Không thể xóa hàng hoá.");
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+ 
+</script>
+
+

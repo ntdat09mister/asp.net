@@ -1,0 +1,18 @@
+﻿@model IEnumerable<MVC05.Models.tblHanghoa>
+
+<div class="product-container">
+    @foreach (var item in Model)
+    {
+        <div class="product-item">
+            <img class="product-image" src="~/Images/@item.sAnhminhhoa" />
+            <div class="product-info">
+                <p>@item.sTenhang</p>
+                <p>@item.fGianiemyet</p>
+                <button class="add-to-cart-btn">
+                    <img src="~/Images/cart.png" style="width:20px;height:20px" />
+                </button>
+            </div>
+        </div>
+    }
+</div>
+

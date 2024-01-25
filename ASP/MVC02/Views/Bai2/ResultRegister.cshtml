@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Kết quả";
+}
+
+<h1>Kết quả</h1>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+    <a asp-action="Register">Quay lại đăng ký</a>
+}
+else
+{
+    <p>@ViewBag.ErrorMessage</p>
+    <a asp-action="Register">Quay lại đăng ký</a>
+}

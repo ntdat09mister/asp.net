@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_Shop4TrainingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="iCartID" />
+    </Key>
+    <Property Name="iCartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="iSL" Type="Int32" Nullable="false" />
+    <Property Name="fk_iHangHoaID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblHanghoa" Relationship="Self.FK__carts__fk_iHangH__619B8048" FromRole="carts" ToRole="tblHanghoa" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblChitiethoadon">
+    <Key>
+      <PropertyRef Name="FK_iHoadonID" />
+      <PropertyRef Name="FK_iHanghoaID" />
+    </Key>
+    <Property Name="FK_iHoadonID" Type="Int32" Nullable="false" />
+    <Property Name="FK_iHanghoaID" Type="Int32" Nullable="false" />
+    <Property Name="iSoluong" Type="Int32" Nullable="false" />
+    <Property Name="fGiaban" Type="Double" Nullable="false" />
+    <NavigationProperty Name="tblHanghoa" Relationship="Self.FK_tblChitiethoadon_tblHanghoa" FromRole="tblChitiethoadon" ToRole="tblHanghoa" />
+    <NavigationProperty Name="tblHoadon" Relationship="Self.FK_tblChitiethoadon_tblHoadon" FromRole="tblChitiethoadon" ToRole="tblHoadon" />
+  </EntityType>
+  <EntityType Name="tblHanghoa">
+    <Key>
+      <PropertyRef Name="PK_iHanghoaID" />
+    </Key>
+    <Property Name="PK_iHanghoaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sTenhang" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fGianiemyet" Type="Double" Nullable="false" />
+    <Property Name="sDacdiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sXuatxu" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="sAnhminhhoa" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__carts__fk_iHangH__619B8048" FromRole="tblHanghoa" ToRole="carts" />
+    <NavigationProperty Name="tblChitiethoadons" Relationship="Self.FK_tblChitiethoadon_tblHanghoa" FromRole="tblHanghoa" ToRole="tblChitiethoadon" />
+  </EntityType>
+  <EntityType Name="tblHoadon">
+    <Key>
+      <PropertyRef Name="PK_iHoadonID" />
+    </Key>
+    <Property Name="PK_iHoadonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tNgaylap" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FK_iKhachhangID" Type="Int32" Nullable="false" />
+    <Property Name="tNgayGiaoHang" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sTennguoinhan" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="sDiachigiaohang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sDienthoaiNguoinhan" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bDathanhtoan" Type="Boolean" Nullable="false" />
+    <Property Name="sNguoilapHoadon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fTileGiamgia" Type="Double" Nullable="false" />
+    <NavigationProperty Name="tblChitiethoadons" Relationship="Self.FK_tblChitiethoadon_tblHoadon" FromRole="tblHoadon" ToRole="tblChitiethoadon" />
+    <NavigationProperty Name="tblKhachhang" Relationship="Self.FK_tblHoadon_tblKhachhang1" FromRole="tblHoadon" ToRole="tblKhachhang" />
+  </EntityType>
+  <EntityType Name="tblKhachhang">
+    <Key>
+      <PropertyRef Name="PK_iKhachhangID" />
+    </Key>
+    <Property Name="PK_iKhachhangID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sHoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sDiachi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="sDienthoai" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="bGioitinh" Type="Boolean" Nullable="false" />
+    <Property Name="tNgaysinh" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sTenCoquan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblHoadons" Relationship="Self.FK_tblHoadon_tblKhachhang1" FromRole="tblKhachhang" ToRole="tblHoadon" />
+  </EntityType>
+  <Association Name="FK__carts__fk_iHangH__619B8048">
+    <End Role="tblHanghoa" Type="Self.tblHanghoa" Multiplicity="1" />
+    <End Role="carts" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHanghoa">
+        <PropertyRef Name="PK_iHanghoaID" />
+      </Principal>
+      <Dependent Role="carts">
+        <PropertyRef Name="fk_iHangHoaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblChitiethoadon_tblHanghoa">
+    <End Role="tblHanghoa" Type="Self.tblHanghoa" Multiplicity="1" />
+    <End Role="tblChitiethoadon" Type="Self.tblChitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHanghoa">
+        <PropertyRef Name="PK_iHanghoaID" />
+      </Principal>
+      <Dependent Role="tblChitiethoadon">
+        <PropertyRef Name="FK_iHanghoaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblChitiethoadon_tblHoadon">
+    <End Role="tblHoadon" Type="Self.tblHoadon" Multiplicity="1" />
+    <End Role="tblChitiethoadon" Type="Self.tblChitiethoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHoadon">
+        <PropertyRef Name="PK_iHoadonID" />
+      </Principal>
+      <Dependent Role="tblChitiethoadon">
+        <PropertyRef Name="FK_iHoadonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblHoadon_tblKhachhang1">
+    <End Role="tblKhachhang" Type="Self.tblKhachhang" Multiplicity="1" />
+    <End Role="tblHoadon" Type="Self.tblHoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKhachhang">
+        <PropertyRef Name="PK_iKhachhangID" />
+      </Principal>
+      <Dependent Role="tblHoadon">
+        <PropertyRef Name="FK_iKhachhangID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_Shop4TrainingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carts" EntityType="Self.cart" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tblChitiethoadons" EntityType="Self.tblChitiethoadon" />
+    <EntitySet Name="tblHanghoas" EntityType="Self.tblHanghoa" />
+    <EntitySet Name="tblHoadons" EntityType="Self.tblHoadon" />
+    <EntitySet Name="tblKhachhangs" EntityType="Self.tblKhachhang" />
+    <AssociationSet Name="FK__carts__fk_iHangH__619B8048" Association="Self.FK__carts__fk_iHangH__619B8048">
+      <End Role="tblHanghoa" EntitySet="tblHanghoas" />
+      <End Role="carts" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblChitiethoadon_tblHanghoa" Association="Self.FK_tblChitiethoadon_tblHanghoa">
+      <End Role="tblHanghoa" EntitySet="tblHanghoas" />
+      <End Role="tblChitiethoadon" EntitySet="tblChitiethoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblChitiethoadon_tblHoadon" Association="Self.FK_tblChitiethoadon_tblHoadon">
+      <End Role="tblHoadon" EntitySet="tblHoadons" />
+      <End Role="tblChitiethoadon" EntitySet="tblChitiethoadons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblHoadon_tblKhachhang1" Association="Self.FK_tblHoadon_tblKhachhang1">
+      <End Role="tblKhachhang" EntitySet="tblKhachhangs" />
+      <End Role="tblHoadon" EntitySet="tblHoadons" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

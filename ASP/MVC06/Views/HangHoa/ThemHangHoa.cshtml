@@ -1,0 +1,46 @@
+﻿@model MVC05.ViewModel.HangHoaViewModel
+
+@{
+    ViewBag.Title = "Thêm Hàng Hóa";
+}
+
+<h2>Thêm Hàng Hóa</h2>
+
+@using (Html.BeginForm("ThemHangHoa", "HangHoa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sTenhang, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.sTenhang, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sTenhang, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fGianiemyet, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.fGianiemyet, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.fGianiemyet, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sDacdiem, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.sDacdiem, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sDacdiem, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sXuatxu, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.sXuatxu, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.sXuatxu, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Anhminhhoa, htmlAttributes: new { @class = "control-label" })
+        <input type="file" name="Anhminhhoa" />
+        @Html.ValidationMessageFor(model => model.Anhminhhoa, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Lưu" class="btn btn-primary" />
+    </div>
+}

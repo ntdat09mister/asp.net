@@ -1,0 +1,89 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.Product_contain {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-width: 90%;
+    margin: auto;
+}
+
+    .Product_contain .product_item {
+        overflow: hidden;
+        padding: 15px;
+        margin: 20px 20px;
+        position: relative;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    }
+
+        .Product_contain .product_item .pro_img {
+            width: 100%;
+        }
+
+        .Product_contain .product_item .product_info {
+            text-decoration: none;
+            color: black;
+            position: relative;
+            display: block;
+            padding-bottom: 15px;
+        }
+
+        .Product_contain .product_item .product_price {
+            text-align: left;
+            display: block;
+            padding: 5px 0;
+            font-weight: bold;
+        }
+
+        .Product_contain .product_item .product_name {
+            font-weight: bold;
+            position: relative;
+            display: block;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+
+.product_detail.Product_contain .product_item .product_price {
+    text-align: left;
+}
+
+.product_detail .product_detail_info {
+    text-align: left;
+}
+
+.tile {
+    text-align: center;
+}
+
+.Product_list .btn_add_to_cart {
+    position: absolute;
+    bottom: 10px;
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 200ms ease;
+    width: 50%;
+}
+
+.Product_list .product_item:hover .btn_add_to_cart {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+

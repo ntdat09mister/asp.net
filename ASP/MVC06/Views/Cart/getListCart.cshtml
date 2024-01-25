@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MVC05.Models.cart>
+<table>
+    <tr>
+        <th>Số thứ tự</th>
+        <th>Hàng hoá id</th>
+        <th>Số lượng</th>
+    </tr>
+    @foreach(var item in Model)
+     {
+        <tr>
+            <td>@item.iCartID</td>
+            <td>@item.fk_iHangHoaID</td>
+            <td>@item.iSL</td>
+        </tr>
+
+     }
+</table>

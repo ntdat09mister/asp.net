@@ -1,0 +1,83 @@
+@model ProductModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product-info {
+            display: flex;
+        }
+
+        .product-image {
+            flex: 1;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product-details {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .product-description {
+            margin-top: 20px;
+        }
+
+        .add-to-cart {
+            margin-top: 20px;
+        }
+
+        .add-to-cart button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Detail</h1>
+        <div class="product-info">
+            <div class="product-image">
+                <img src="@Model.ImageURL" alt="Product Image" />
+            </div>
+            <div class="product-details">
+                <h2 class="product-name">@Model.ProductName</h2>
+                <p class="product-price">Price: @Model.ProductPrice</p>
+                <p class="product-description">@Model.Description</p>
+                <div class="add-to-cart">
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿@model List<MVC04.Models.tblProduct>
+@{
+    ViewBag.Title = "All Product";
+}
+<h2>NewProduct</h2>
+<div>
+    <p>@Html.ActionLink("Add some more", "NewProduct")</p>
+</div>
+<div class="Product_contain Product_list">
+    @foreach (var product in Model)
+    {
+
+        <div class=" product_item col-md-3">
+
+            <img class="pro_img" src="@Url.Content(product.ImageURL)"><br />
+            <span class="product_info">
+                <span class="product_name"><strong>Name: </strong>@product.ProductName</span><br />
+                <span class="product_price"><strong>Price: </strong>@product.ProductPrice</span><br />
+                <span><strong>Description: </strong> @product.Description</span>
+            </span>
+            <p><button class="btn_add_to_cart">Add to cart</button></p>
+        </div>
+    }
+</div>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .product-card {
+            width: calc(33.33% - 20px);
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product-card .product-details {
+            padding: 10px;
+        }
+
+        .product-card h5 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .product-card .product-price {
+            text-align: right;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .product-card .product-description {
+            margin-top: 10px;
+        }
+
+        .product-card .add-to-cart-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product List</h1>
+    <div class="product-list">
+        @foreach (var product in Model)
+        {
+            <div class="product-card">
+                <div class="product-price">@product.ProductPrice</div>
+                <div>
+                    <img src="@product.ImageURL" alt="Product Image" />
+                </div>
+                <div class="product-details">
+                    <a asp-controller="Product" asp-action="ProductDetail" asp-route-id="@product.ProductID" style="text-decoration: none; color: inherit;">
+                        <h5>@product.ProductName</h5>
+                        <p class="product-description">@product.Description</p>
+                    </a>
+                    <button class="add-to-cart-button">Add to cart</button>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

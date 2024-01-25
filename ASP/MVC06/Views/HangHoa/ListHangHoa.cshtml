@@ -1,0 +1,125 @@
+﻿@model IEnumerable<MVC05.Models.tblHanghoa>
+
+<style>
+
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+
+    .product-item {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        width: 200px;
+        text-align: center;
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+    .product-info {
+        margin-top: 10px;
+    }
+
+
+    .add-to-cart-btn {
+        background-color: white;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-top: 8px;
+        cursor: pointer;
+    }
+
+    /* Style cho ô lọc */
+    .filter-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    /* Style cho nút lọc */
+    .filter-btn {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin-left: 8px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="filter-container">
+    <label>Tên hàng hoá</label>
+    <input type="text" />
+    <button class="filter-btn">Lọc</button>
+</div>
+
+<div class="product-container">
+    @foreach (var item in Model)
+    {
+        <div class="product-item">
+            <img class="product-image" src="~/Images/@item.sAnhminhhoa" />
+            <div class="product-info">
+                <p>@item.sTenhang</p>
+                <p>@item.fGianiemyet</p>
+                <button class="add-to-cart-btn" data-hanghoa-id="@item.PK_iHanghoaID">
+                    <img src="~/Images/cart.png" style="width:20px;height:20px" />
+                </button>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".filter-btn").addEventListener("click", function () {
+            var productName = document.querySelector("input[type='text']").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/HangHoa/FilterHangHoa?name=" + productName, true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.querySelector(".product-container").innerHTML = xhr.responseText;
+                } else {
+                    alert("Đã có lỗi xảy ra");
+                }
+            };
+
+            xhr.send();
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".add-to-cart-btn").addEventListener("click", function () {
+            var hanghoaID = this.getAttribute("data-hanghoa-id")
+            var xhr = new XMLHttpRequest()
+            xhr.open("POST", "/HangHoa/addtoCarts")
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+            var data = JSON.stringify({ hanghoaID: hanghoaID })
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert("Thêm thành công")
+                }
+                else alert("Đã có lỗi xảy ra")
+            }
+            xhr.send(data)
+        })
+    })
+    
+</script>
+
